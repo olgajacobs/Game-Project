@@ -1,6 +1,6 @@
 @font-face {
     font-family: StratosSkyeng; 
-    src: url(./statosskyeng-v1.001/stratosskyengweb-regular.woff);
+    src: url(./assets/fonts/statosskyeng-v1.001/stratosskyengweb-regular.woff);
    }
    
 * {
@@ -57,9 +57,10 @@ body {
     border-radius: 12px;
     display: flex;
     justify-content: center;
-}
-
-.start {
+    cursor: pointer;
+  }
+  
+  .start {
     width: 246px;
     height: 50px;
     background: #7AC100;
@@ -70,8 +71,14 @@ body {
     display: flex;
     align-items: center;
     text-align: center;
-    font-feature-settings: 'pnum' on, 'lnum' on;
+    font-feature-settings: "pnum" on, "lnum" on;
     color: #FFFFFF;
     justify-content: center;
     border: transparent;
-}
+  }
+  .red {
+    background-color: rgb(211, 137, 137);
+  }
+  .pointer {
+    cursor: pointer;
+  }

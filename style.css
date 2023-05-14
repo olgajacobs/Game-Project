@@ -1,6 +1,6 @@
 @font-face {
   font-family: StratosSkyeng;
-  src: url(./statosskyeng-v1.001/stratosskyengweb-regular.woff);
+  src: url(./assets/fonts/statosskyeng-v1.001/stratosskyengweb-regular.woff);
 }
 * {
   padding: 0;
@@ -57,6 +57,7 @@ body {
   border-radius: 12px;
   display: flex;
   justify-content: center;
+  cursor: pointer;
 }
 
 .start {
@@ -74,4 +75,12 @@ body {
   color: #FFFFFF;
   justify-content: center;
   border: transparent;
+}
+
+.red {
+  background-color: rgb(211, 137, 137);
+}
+
+.pointer {
+  cursor: pointer;
 }/*# sourceMappingURL=style.css.map */
