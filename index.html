@@ -1,24 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Project</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
 
-    <div class="main">
-        <h3 class="choose">Выбери сложность</h3>
-        <div class="levels">
-            <a class="level" data-game-level=1>1</a>
-            <a class="level" data-game-level=2>2</a>
-            <a class="level" data-game-level=3>3</a>
-        </div>
-        <button class="start">Старт</button>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Project</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="main">
+    <h3 class="main_title">Выбери сложность</h3>
+    <div class="radio_group">
+        <input id="radio_1" type="radio" name="radio" value="1">
+        <label for="radio_1">1</label>
+
+        <input id="radio_2" type="radio" name="radio" value="2">
+        <label for="radio_2">2</label>
+     
+        <input id="radio_3" type="radio" name="radio" value="3">
+        <label for="radio_3">3</label>
     </div>
-    
+    <button class="start_button">Старт</button>
+  </div>
+
 </body>
 <script type="module" src="script.js"></script>
+
 </html>
