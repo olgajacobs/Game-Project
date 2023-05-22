@@ -1,0 +1,123 @@
+@font-face {
+    font-family: StratosSkyeng;
+    src: "'url(./statosskyeng-v1.001/stratosskyengweb-regular.woff)'";
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #004980;
+    font-family: "'StratosSkyeng'", sans-serif;
+}
+
+.main {
+    width: 480px;
+    height: 459px;
+    background: #c2f5ff;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 48px;
+    align-items: center;
+    margin: auto;
+    margin-top: 158px;
+}
+
+.main-title {
+    width: 208px;
+    height: 96px;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+    text-align: center;
+    font-feature-settings: "'pnum'" on, "'lnum'" on;
+    color: #004980;
+    margin-top: 52px;
+}
+
+.radio-group {
+    display: flex;
+    gap: 30px;
+}
+
+.radio-group input[type='radio'] {
+    display: none;
+}
+
+.radio-group label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 70px;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 34px;
+    color: #0080c1;
+    background: #fff;
+    border: 1px solid #999;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Checked */
+
+.radio-group label:hover {
+    color: #666;
+}
+
+.radio-group input[type='radio']:checked + label {
+    background: #ffe0a6;
+}
+
+.start-button {
+    width: 246px;
+    height: 50px;
+    background: #7ac100;
+    font-feature-settings: '"pnum" on, "lnum" on';
+    font-weight: 400;
+    font-size: 24px;
+    color: #fff;
+    border: 1px solid #999;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.wrapper {
+    width: 979px;
+    margin: auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 22px;
+    align-items: flex-end;
+}
+
+.time {
+    height: 91px;
+}
+
+.memory-game {
+    margin-top: 35px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: space-between;
+}
+
+.memory-card {
+    width: 0, 11111%;
+    height: 25%;
+}
