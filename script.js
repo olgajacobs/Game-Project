@@ -1,27 +1,68 @@
 export const gameStatus = {
-  level: 0,
-  timeStart: 0,
-  cardCombination: new Array
-}
+    level: 0,
+    firstCard: null,
+    timeStart: 0,
+};
+const cardQuantityForLevel = [6, 12, 18];
+export let cards = [];
 
+import { chooseLevel } from './src/level.js';
+import { playGame } from './src/game.js';
+import {
+    START_PAGE,
+    GAME_PAGE,
+    WIN_PAGE,
+    DEFEAT_PAGE,
+    CLOSED,
+    BEGIN,
+} from './src/const.js';
 
-document.querySelector(".radio_group").addEventListener("click", () => {
-  const radioButtons = document.querySelectorAll('input[type="radio"]');
-  for (let radioButton of radioButtons) {
-    if (radioButton.checked) {
-      gameStatus.level = radioButton.value;
-      const startButtonClasslist=document.querySelector(".start_button").classList;
-      if (!startButtonClasslist.contains('pointer')) startButtonClasslist.add('pointer');
+export const goToPage = (newPage, data) => {
+    switch (newPage) {
+        case START_PAGE:
+            chooseLevel();
+            break;
+        case GAME_PAGE:
+            cards = generateCards(cardQuantityForLevel[gameStatus.level - 1]);
+            playGame(BEGIN);
+            break;
+        case WIN_PAGE:
+            // renderWinPageComponent();
+            break;
+        case DEFEAT_PAGE:
+            // renderDefeatPageComponent();
+            break;
+        default:
+            break;
     }
-  }
-})
+    return;
+};
+const generateCards = (cardQuantity) => {
+    const CardList = [];
+    let auxArray = [];
+    for (let i = 0; i < 36; i++) auxArray[i] = i; // Создаем полный набор карт
+    shuffle(auxArray); // Перемешиваем его карты
 
-document.querySelector(".start_button").addEventListener("click", () => {
-  if (gameStatus.level !== 0) {
-    gameStatus.timeStart = new Date();
-    alert(`Поздравляем! Вы выбрали уровень сложности игры = ${gameStatus.level}`);
-  }
-})
+    auxArray = auxArray.slice(0, cardQuantity); //Вырезаем нужное количество карт
+    auxArray = [...auxArray, ...auxArray]; //Добавляем пары
 
+    shuffle(auxArray); // Перемешиваем отбранные пары
 
+    for (let i = 0; i < 36; i++) {
+        CardList[i] = {
+            id: i < cardQuantity * 2 ? auxArray[i] : 99,
+            status: CLOSED,
+        }; // 99 - у нас будет нарисована "неактивная рубашка"
+    }
+    return CardList;
+};
 
+const shuffle = (array) => {
+    // Тасование Фишера — Йетса
+    for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+};
+
+goToPage(START_PAGE);
