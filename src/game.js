@@ -8,6 +8,7 @@ import {
     BEGIN,
     CARDS,
     GAME,
+    START_PAGE,
 } from './const.js';
 
 export function playGame(status) {
@@ -45,14 +46,16 @@ function fillStatus(cards, status) {
         cards.forEach((element, index) => (element.status = CLOSED));
     }
 }
+
+
 const timer = (deadline) => {
-    const timerString = document.querySelector('.back-counter');
-    timerString.innerText = deadline;
+    const timerString = document.getElementById("timerid");
+    timerString.innerHTML = '0:0'+ deadline;
     let time = deadline;
 
     const interval = setInterval(() => {
         time -= 1;
-        timerString.innerText = time;
+        timerString.innerHTML = '0:0'+ time;
     }, 1000);
 
     setTimeout(() => {
@@ -61,12 +64,35 @@ const timer = (deadline) => {
     }, deadline * 1000);
 };
 
+
+let secs, now, gameTimer,
+    mins = 0
+
+function time(){
+
+    setTimeout(() => {
+        const timerid = document.getElementById("timerid");
+        secs = Math.floor((Date.now() - now)/1000)
+        if(secs === 60 ){
+          now = Date.now()
+          mins++
+        }
+        if(secs < 10){
+          secs = '0' + secs
+        }
+        timerid.innerHTML = mins + ':' + secs
+     }, 5000)
+}
+
 function activateStartButton() {
     const startButton = document.querySelector('.start-button');
     startButton.classList.add('pointer');
     startButton.onclick = function () {
         deactivateStartButton();
         playGame(CARDS);
+        now = Date.now() + 5000
+        mins = 0
+        gameTimer = setInterval(time)
     };
 }
 function deactivateStartButton() {
@@ -95,9 +121,15 @@ function activateCards(cards) {
                 if (gameStatus.firstCard) {
                     // Открыли вторую карту
                     if (gameStatus.firstCard === cards[card.id].id) {
-                        alert('Вы победили');
+                        setTimeout(() => {
+                            alert('Вы победили');
+                        },1000)
+                
                     } else {
-                        alert('Вы проиграли');
+                        setTimeout(() => {
+                            alert('Вы проиграли');
+                            goToPage(START_PAGE)
+                        },1000)
                     }
                     gameStatus.firstCard = null;
                 } else {

@@ -107,6 +107,39 @@ header {
 
 .time {
     height: 91px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.min,
+.sek {
+    font-family: "'StratosSkyeng'", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 32px;
+    font-feature-settings: 'pnum' on, 'lnum' on;
+    color: #fff;
+}
+
+.timeset {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: -15px;
+}
+
+.min {
+    padding-right: 57px;
+}
+
+.game-timer {
+    font-family: "'StratosSkyeng'", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 72px;
+    color: #fff;
 }
 
 .memory-game {

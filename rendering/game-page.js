@@ -4,7 +4,10 @@ export function renderGamePage(cards) {
     const appEl = document.getElementById('wrapper');
 
     let appHtml = `  <header>
-        <div class="time"><img src="./assets/images/таймер.png" alt="timer" class="timer"></div>
+        <div class="time">
+        <section class="timeset"><p class="min">min</><p class="sek">sek</p></section>
+        <section><span id="timerid" class="game-timer">0:00</span></section>
+        </div>
         <div class="back-counter"></div>
         <div class="start-button">Старт</div>
     </header>`;
