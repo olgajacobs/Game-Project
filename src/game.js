@@ -1,5 +1,5 @@
-import { cards, gameStatus, goToPage } from '../script.js';
-import { renderGamePage } from '../rendering/game-page.js';
+import { cards, gameStatus, goToPage } from '../script.js'
+import { renderGamePage } from '../rendering/game-page.js'
 import {
     WIN_PAGE,
     DEFEAT_PAGE,
@@ -8,136 +8,125 @@ import {
     BEGIN,
     CARDS,
     GAME,
-    START_PAGE,
-} from './const.js';
+} from './const.js'
+
+let gameTimer, mins, secs
 
 export function playGame(status) {
     switch (status) {
         case BEGIN:
-            renderGamePage(cards);
-            activateStartButton();
-            break;
+            renderGamePage(cards)
+            activateStartButton()
+            break
         case CARDS:
-            fillStatus(cards, CARDS);
-            renderGamePage(cards);
-            timer(5); // Показываем играющие карты на 5 секунд
+            fillStatus(cards, CARDS)
+            renderGamePage(cards)
+            timer(5) // Показываем играющие карты на 5 секунд
 
-            break;
+            break
         case GAME:
-            fillStatus(cards, GAME);
-            renderGamePage(cards);
-            activateCards(cards); // Активируем "Клик" на играющих картах
-            // game(cards);
-            break;
+            fillStatus(cards, GAME)
+            renderGamePage(cards)
+            activateCards(cards) // Активируем "Клик" на играющих картах
+            timer() //Запускаем таймер игры
+            break
         default:
-            alert('Ошибка в playGame');
-            break;
+            alert('Ошибка в playGame')
+            break
     }
 }
 
-function fillStatus(cards, status) {
+export function fillStatus(cards, status) {
     if (status === CARDS) {
         cards.forEach((element, index) =>
             element.id === 99
                 ? (element.status = CLOSED)
                 : (element.status = OPENED)
-        );
+        )
     } else {
-        cards.forEach((element, index) => (element.status = CLOSED));
+        cards.forEach((element, index) => (element.status = CLOSED))
     }
 }
 
-
 const timer = (deadline) => {
-    const timerString = document.getElementById("timerid");
-    timerString.innerHTML = '0:0'+ deadline;
-    let time = deadline;
+    const timerString = document.getElementById('timerid')
+    if (deadline) {
+        //Если задан параметр то ведем обратный отсчет
+        timerString.innerHTML = `00:0${deadline}`
+        let time = deadline
+        const reverseTimer = setInterval(() => {
+            time -= 1
+            timerString.innerHTML = `00.0${time}`
+        }, 1000)
 
-    const interval = setInterval(() => {
-        time -= 1;
-        timerString.innerHTML = '0:0'+ time;
-    }, 1000);
-
-    setTimeout(() => {
-        clearInterval(interval);
-        playGame(GAME);
-    }, deadline * 1000);
-};
-
-
-let secs, now, gameTimer,
-    mins = 0
-
-function time(){
-
-    setTimeout(() => {
-        const timerid = document.getElementById("timerid");
-        secs = Math.floor((Date.now() - now)/1000)
-        if(secs === 60 ){
-          now = Date.now()
-          mins++
-        }
-        if(secs < 10){
-          secs = '0' + secs
-        }
-        timerid.innerHTML = mins + ':' + secs
-     }, 5000)
+        setTimeout(() => {
+            //Отключаем таймер через 5 сек и запускаем игру
+            clearInterval(reverseTimer)
+            playGame(GAME)
+        }, deadline * 1000)
+    } else {
+        //Если не задан парметр до запускаем бесконечный 1 сек счетчик
+        gameStatus.timeStart = Date.now()
+        gameTimer = setInterval(() => {
+            const _tsec = (Date.now() - gameStatus.timeStart) / 1000
+            mins = Math.floor(_tsec / 60)
+            secs = Math.floor(_tsec % 60)
+            if (secs < 10) secs = '0' + secs
+            if (mins < 10) mins = '0' + mins
+            gameStatus.timeString = mins + '.' + secs
+            timerString.innerHTML = mins + '.' + secs
+        }, 1000)
+    }
 }
 
 function activateStartButton() {
-    const startButton = document.querySelector('.start-button');
-    startButton.classList.add('pointer');
+    const startButton = document.querySelector('.start-button')
+    startButton.classList.add('pointer')
     startButton.onclick = function () {
-        deactivateStartButton();
-        playGame(CARDS);
-        now = Date.now() + 5000
-        mins = 0
-        gameTimer = setInterval(time)
-    };
+        deactivateStartButton()
+        playGame(CARDS)
+    }
 }
 function deactivateStartButton() {
-    const startButton = document.querySelector('.start-button');
-    startButton.onclick = '';
-    startButton.classList.remove('pointer');
+    const startButton = document.querySelector('.start-button')
+    startButton.onclick = ''
+    startButton.classList.remove('pointer')
 }
 function activateCards(cards) {
-    const cardsList = document.querySelectorAll('.memory-card');
+    const cardsList = document.querySelectorAll('.memory-card')
     for (let card of cardsList) {
-        if (cards[card.id].id !== 99) card.classList.add('pointer');
+        if (cards[card.id].id !== 99) card.classList.add('pointer')
         card.onclick = function () {
             if (cards[card.id].id !== 99) {
-                cards[card.id].status = OPENED; // Возможно, что уже не нужно
+                cards[card.id].status = OPENED // Возможно, что уже не нужно
 
-                const currentCard = document.getElementById(card.id);
-                currentCard.classList.remove('pointer');
+                const currentCard = document.getElementById(card.id)
+                currentCard.classList.remove('pointer')
                 for (const child of currentCard.children) {
                     child.setAttribute(
                         'src',
                         `./assets/cards/${cards[card.id].id}.png`
-                    );
+                    )
                 }
-                //TODO Разобраться почему alert мешает перерисовке  карты
-
                 if (gameStatus.firstCard) {
                     // Открыли вторую карту
                     if (gameStatus.firstCard === cards[card.id].id) {
-                        setTimeout(() => {
-                            alert('Вы победили');
-                        },1000)
-                
+                        if (gameStatus.cardsNeedToOpen === 1) {
+                            clearInterval(gameTimer)
+                            goToPage(WIN_PAGE)
+                        } else {
+                            gameStatus.cardsNeedToOpen -= 1
+                        }
                     } else {
-                        setTimeout(() => {
-                            alert('Вы проиграли');
-                            goToPage(START_PAGE)
-                        },1000)
+                        clearInterval(gameTimer)
+                        goToPage(DEFEAT_PAGE)
                     }
-                    gameStatus.firstCard = null;
+                    gameStatus.firstCard = null
                 } else {
-                    gameStatus.firstCard = cards[card.id].id;
+                    gameStatus.firstCard = cards[card.id].id
                 }
-
-                card.onclick = '';
+                card.onclick = ''
             }
-        };
+        }
     }
 }

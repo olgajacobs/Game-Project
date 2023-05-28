@@ -6,7 +6,7 @@ export function renderGamePage(cards) {
     let appHtml = `  <header>
         <div class="time">
         <section class="timeset"><p class="min">min</><p class="sek">sek</p></section>
-        <section><span id="timerid" class="game-timer">0:00</span></section>
+        <section><span id="timerid" class="game-timer">00.00</span></section>
         </div>
         <div class="back-counter"></div>
         <div class="start-button">Старт</div>
