@@ -12,13 +12,14 @@ export type GameStatus = {
     timeString: string;
 };
 
-export const gameStatus = {
+export const gameStatus: GameStatus = {
     level: 1,
-    firstCard: null,
+    firstCard: undefined,
     cardsNeedToOpen: 0,
     timeStart: 0,
-    timeString: '00.00',
-}
+    timeString: '00:00',
+};
+
 const cardQuantityForLevel = [2, 12, 18]
 export let cards:Cards = [];
 

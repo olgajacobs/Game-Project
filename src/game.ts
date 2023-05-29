@@ -39,13 +39,13 @@ export function playGame(status: string) {
 
 export function fillStatus(cards: Cards, status: string) {
     if (status === CARDS) {
-        cards.forEach((element, index) =>
+        cards.forEach((element) =>
             element.id === 99
                 ? (element.status = CLOSED)
                 : (element.status = OPENED)
         );
     } else {
-        cards.forEach((element, index) => (element.status = CLOSED));
+        cards.forEach((element) => (element.status = CLOSED));
     }
 }
 
@@ -138,9 +138,9 @@ function activateCards(cards: Cards) {
                         clearInterval(gameTimer);
                         goToPage(DEFEAT_PAGE);
                     }
-                    gameStatus.firstCard == undefined;
+                    gameStatus.firstCard = undefined;
                 } else {
-                    gameStatus.firstCard == cards[Number(card.id)];
+                    gameStatus.firstCard = cards[Number(card.id)];
                 }
                 (card as HTMLDivElement).onclick = null;
             }

@@ -162,10 +162,10 @@ var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from
 };
 var gameStatus = {
     level: 1,
-    firstCard: null,
+    firstCard: undefined,
     cardsNeedToOpen: 0,
     timeStart: 0,
-    timeString: '00.00',
+    timeString: '00:00',
 };
 var cardQuantityForLevel = [2, 12, 18];
 var cards = [];
@@ -338,14 +338,14 @@ function playGame(status) {
 }
 function fillStatus(cards, status) {
     if (status === _const__WEBPACK_IMPORTED_MODULE_2__.CARDS) {
-        cards.forEach(function (element, index) {
+        cards.forEach(function (element) {
             return element.id === 99
                 ? (element.status = _const__WEBPACK_IMPORTED_MODULE_2__.CLOSED)
                 : (element.status = _const__WEBPACK_IMPORTED_MODULE_2__.OPENED);
         });
     }
     else {
-        cards.forEach(function (element, index) { return (element.status = _const__WEBPACK_IMPORTED_MODULE_2__.CLOSED); });
+        cards.forEach(function (element) { return (element.status = _const__WEBPACK_IMPORTED_MODULE_2__.CLOSED); });
     }
 }
 var timer = function (deadline) {
@@ -420,7 +420,7 @@ function activateCards(cards) {
                 }
                 if (_script__WEBPACK_IMPORTED_MODULE_0__.gameStatus.firstCard) {
                     // Открыли вторую карту
-                    if (_script__WEBPACK_IMPORTED_MODULE_0__.gameStatus.firstCard === cards[Number(card.id)].id) {
+                    if (_script__WEBPACK_IMPORTED_MODULE_0__.gameStatus.firstCard.id === cards[Number(card.id)].id) {
                         if (_script__WEBPACK_IMPORTED_MODULE_0__.gameStatus.cardsNeedToOpen === 1) {
                             clearInterval(gameTimer);
                             (0,_script__WEBPACK_IMPORTED_MODULE_0__.goToPage)(_const__WEBPACK_IMPORTED_MODULE_2__.WIN_PAGE);
