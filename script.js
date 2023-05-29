@@ -20,6 +20,7 @@ import {
     CLOSED,
     BEGIN,
 } from './src/const.js'
+import "./style.css"
 
 export const goToPage = (newPage) => {
     switch (newPage) {
