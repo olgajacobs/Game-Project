@@ -433,10 +433,10 @@ function activateCards(cards) {
                         clearInterval(gameTimer);
                         (0,_script__WEBPACK_IMPORTED_MODULE_0__.goToPage)(_const__WEBPACK_IMPORTED_MODULE_2__.DEFEAT_PAGE);
                     }
-                    _script__WEBPACK_IMPORTED_MODULE_0__.gameStatus.firstCard == undefined;
+                    _script__WEBPACK_IMPORTED_MODULE_0__.gameStatus.firstCard = undefined;
                 }
                 else {
-                    _script__WEBPACK_IMPORTED_MODULE_0__.gameStatus.firstCard == cards[Number(card.id)];
+                    _script__WEBPACK_IMPORTED_MODULE_0__.gameStatus.firstCard = cards[Number(card.id)];
                 }
                 card.onclick = null;
             }
