@@ -3,6 +3,7 @@ import { renderGamePage } from './game-page.js'
 import { CARDS } from '../src/const.js'
 import { fillStatus } from '../src/game.js'
 
+
 export function renderWinPage() {
     fillStatus(cards, CARDS)
     renderGamePage(cards)

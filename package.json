@@ -5,8 +5,8 @@
   "main": "script.js",
   "scripts": {
     "format": "prettier —write .",
-    "dev": "webpack --mode development",
-    "build": "NODE_ENV=production webpack",
+    "dev": "cross-env NODE_ENV=development webpack",
+    "build": "cross-env NODE_ENV=production webpack",
     "start": "webpack-dev-server --open"
   },
   "author": "",
@@ -28,5 +28,8 @@
     "webpack": "^5.83.1",
     "webpack-cli": "^5.1.1",
     "webpack-dev-server": "^4.15.0"
+  },
+  "dependencies": {
+    "cross-env": "^7.0.3"
   }
 }
