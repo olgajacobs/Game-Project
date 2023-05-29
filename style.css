@@ -73,7 +73,8 @@ body {
     background: #ffe0a6;
 }
 
-.start-button {
+.start-button,
+.restart-button {
     width: 246px;
     height: 50px;
     background: #7ac100;
@@ -96,6 +97,7 @@ body {
 .wrapper {
     width: 979px;
     margin: auto;
+    position: relative;
 }
 
 header {
@@ -155,9 +157,62 @@ header {
     height: 25%;
 }
 
+
 .back-counter {
     font-weight: 600;
     font-size: 40px;
     width: 50px;
     color: #e24c4c;
+}
+
+.win-title {
+    height: 56px;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+    text-align: center;
+    font-feature-settings: "'pnum'" on, "'lnum'" on;
+    color: #004980;
+    margin-top: 12px;
+}
+
+.win-smile {
+    margin-top: 15px;
+}
+
+.win-main {
+    width: 480px;
+    height: 459px;
+    background: #c2f5ff;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    margin-top: 158px;
+    overflow: hidden;
+    position: absolute;
+    top: calc(50% - 300px);
+    left: calc(50% - 240px);
+    box-shadow: rgb(0 0 0 / 50%) 0 0 0 1000px;
+}
+
+.spended-time-title {
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.spended-time {
+    margin-bottom: 25px;
+}
+
+.test {
+    width: 208px;
+    height: 96px;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+    text-align: center;
+    color: #800013;
+    margin-top: 52px;
 }
