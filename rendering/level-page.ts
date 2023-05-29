@@ -1,6 +1,6 @@
 export function renderLevelPage() {
-    const appEl = document.getElementById('wrapper');
-
+    const appEl= document.getElementById('wrapper');
+if (appEl) { 
     const appHtml = `
             <div class="main">
                 <h3 class="main-title">Выбери сложность</h3>
@@ -18,4 +18,5 @@ export function renderLevelPage() {
             </div>
         `;
     appEl.innerHTML = appHtml;
+}
 }

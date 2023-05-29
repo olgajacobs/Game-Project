@@ -1,3 +1,17 @@
+export type Card = {
+    id: number;
+    status: string;
+};
+export type Cards = Array<Card>;
+
+export type GameStatus = {
+    level: number;
+    firstCard?: Card;
+    cardsNeedToOpen: number;
+    timeStart: number;
+    timeString: string;
+};
+
 export const gameStatus = {
     level: 1,
     firstCard: null,
@@ -5,13 +19,13 @@ export const gameStatus = {
     timeStart: 0,
     timeString: '00.00',
 }
-const cardQuantityForLevel = [6, 12, 18]
-export let cards = []
+const cardQuantityForLevel = [2, 12, 18]
+export let cards:Cards = [];
 
-import { chooseLevel } from './src/level.js'
-import { playGame } from './src/game.js'
-import { winPage } from './src/win.js'
-import { defeatPage } from './src/defeat.js'
+import { chooseLevel } from './src/level'
+import { playGame } from './src/game'
+import { winPage } from './src/win'
+import { defeatPage } from './src/defeat'
 import {
     START_PAGE,
     GAME_PAGE,
@@ -19,10 +33,12 @@ import {
     DEFEAT_PAGE,
     CLOSED,
     BEGIN,
-} from './src/const.js'
+} from './src/const'
 import "./style.css"
 
-export const goToPage = (newPage) => {
+
+
+export const goToPage = (newPage: string) => {
     switch (newPage) {
         case START_PAGE:
             chooseLevel()
@@ -47,7 +63,7 @@ export const goToPage = (newPage) => {
     }
     return
 }
-const generateCards = (cardQuantity) => {
+const generateCards = (cardQuantity: number) => {
     const CardList = []
     let auxArray = []
     for (let i = 0; i < 36; i++) auxArray[i] = i // Создаем полный набор карт
@@ -67,7 +83,7 @@ const generateCards = (cardQuantity) => {
     return CardList
 }
 
-const shuffle = (array) => {
+const shuffle = (array:Array<number>) => {
     // Тасование Фишера — Йетса
     for (let i = array.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1))
