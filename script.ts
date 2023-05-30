@@ -20,7 +20,7 @@ export const gameStatus: GameStatus = {
     timeString: '00:00',
 };
 
-const cardQuantityForLevel = [2, 12, 18]
+const cardQuantityForLevel = [6, 12, 18]
 export let cards:Cards = [];
 
 import { chooseLevel } from './src/level'
@@ -64,7 +64,7 @@ export const goToPage = (newPage: string) => {
     }
     return
 }
-const generateCards = (cardQuantity: number) => {
+export const generateCards = (cardQuantity: number) => {
     const CardList = []
     let auxArray = []
     for (let i = 0; i < 36; i++) auxArray[i] = i // Создаем полный набор карт
