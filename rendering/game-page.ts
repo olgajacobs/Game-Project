@@ -1,8 +1,9 @@
-import { CLOSED } from '../src/const.js';
+import { CLOSED } from '../src/const';
+import { Card, Cards } from '../script';
 
-export function renderGamePage(cards) {
+export function renderGamePage(cards:Cards) {
     const appEl = document.getElementById('wrapper');
-
+if (appEl) {
     let appHtml = `  <header>
         <div class="time">
         <section class="timeset"><p class="min">min</><p class="sek">sek</p></section>
@@ -13,15 +14,16 @@ export function renderGamePage(cards) {
     </header>`;
     appHtml += `<div class="memory-game">`;
     appHtml += cards
-        .map((card, index) => {
+        .map((card, index:Number) => {
             return renderCard(card, index);
         })
         .join('');
     appHtml += `</div>`;
     appEl.innerHTML = appHtml;
 }
+}
 
-function renderCard(card, index) {
+function renderCard(card:Card, index:Number) {
     // Рендер одной карты
 
     return `<div class="memory-card" id=${index}> 
