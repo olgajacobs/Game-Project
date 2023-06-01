@@ -61,7 +61,7 @@ __webpack_require__.r(__webpack_exports__);
 function renderGamePage(cards) {
     var appEl = document.getElementById('wrapper');
     if (appEl) {
-        var appHtml = "  <header>\n        <div class=\"time\">\n        <section class=\"timeset\"><p class=\"min\">min</><p class=\"sek\">sek</p></section>\n        <section><span id=\"timerid\" class=\"game-timer\">00.00</span></section>\n        </div>\n        <div class=\"back-counter\"></div>\n        <div class=\"start-button\">\u0421\u0442\u0430\u0440\u0442</div>\n    </header>";
+        var appHtml = "  <header>\n        <div class=\"time\">\n        <section class=\"timeset\"><p class=\"min\">min</><p class=\"sek\">sek</p></section>\n        <section><span id=\"timerid\" class=\"game-timer\">00.00</span></section>\n        </div>\n        <div class=\"back-counter\"></div>\n        <div class=\"start-button\">\u041D\u0430\u0447\u0430\u0442\u044C \u0437\u0430\u043D\u043E\u0432\u043E</div>\n    </header>";
         appHtml += "<div class=\"memory-game\">";
         appHtml += cards
             .map(function (card, index) {
@@ -125,7 +125,7 @@ function renderWinPage() {
     var appEl = document.getElementById('wrapper');
     if (appEl) {
         var appHtml = appEl.innerHTML +
-            "\n            <div class=\"win-main\">\n                <div class=\"win-smile\"> <img src=\"./assets/images/win.png\" alt=\"win\" class='win-mark'></div>\n                    <h3 class=\"win-title\">\u0412\u044B \u0432\u044B\u0438\u0433\u0440\u0430\u043B\u0438</h3>\n                    <h4 class=\"spended-time-title\">\u0417\u0430\u0442\u0440\u0430\u0447\u0435\u043D\u043D\u043E\u0435 \u0432\u0440\u0435\u043C\u044F:</h4>\n\n                    <div class=\"spended-time\">\n                        <section><span id=\"timerid\" class=\"game-timer\">".concat(_script__WEBPACK_IMPORTED_MODULE_0__.gameStatus.timeString, "</span></section>\n                    </div>\n                    <button class=\"restart-button pointer\">\u0418\u0433\u0440\u0430\u0442\u044C \u0441\u043D\u043E\u0432\u0430</button>\n            </div>\n        ");
+            "<div class=\"win-main\">\n                <div class=\"win-smile\"> <img src=\"./assets/images/win.png\" alt=\"win\" class='win-mark'></div>\n                    <h3 class=\"win-title\">\u0412\u044B \u0432\u044B\u0438\u0433\u0440\u0430\u043B\u0438</h3>\n                    <h4 class=\"spended-time-title\">\u0417\u0430\u0442\u0440\u0430\u0447\u0435\u043D\u043D\u043E\u0435 \u0432\u0440\u0435\u043C\u044F:</h4>\n\n                    <div class=\"spended-time\">\n                        <section><span id=\"timerid\" class=\"game-timer\">".concat(_script__WEBPACK_IMPORTED_MODULE_0__.gameStatus.timeString, "</span></section>\n                    </div>\n                    <button class=\"restart-button pointer\">\u0418\u0433\u0440\u0430\u0442\u044C \u0441\u043D\u043E\u0432\u0430</button>\n            </div>\n        ");
         appEl.innerHTML = appHtml;
     }
 }
@@ -143,6 +143,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   cards: () => (/* binding */ cards),
 /* harmony export */   gameStatus: () => (/* binding */ gameStatus),
+/* harmony export */   generateCards: () => (/* binding */ generateCards),
 /* harmony export */   goToPage: () => (/* binding */ goToPage)
 /* harmony export */ });
 /* harmony import */ var _src_level__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./src/level */ "./src/level.ts");
@@ -167,7 +168,7 @@ var gameStatus = {
     timeStart: 0,
     timeString: '00:00',
 };
-var cardQuantityForLevel = [2, 12, 18];
+var cardQuantityForLevel = [6, 12, 18];
 var cards = [];
 
 
@@ -184,7 +185,7 @@ var goToPage = function (newPage) {
             gameStatus.cardsNeedToOpen =
                 cardQuantityForLevel[gameStatus.level - 1];
             cards = generateCards(cardQuantityForLevel[gameStatus.level - 1]);
-            (0,_src_game__WEBPACK_IMPORTED_MODULE_1__.playGame)(_src_const__WEBPACK_IMPORTED_MODULE_4__.BEGIN);
+            (0,_src_game__WEBPACK_IMPORTED_MODULE_1__.playGame)(_src_const__WEBPACK_IMPORTED_MODULE_4__.CARDS);
             break;
         case _src_const__WEBPACK_IMPORTED_MODULE_4__.WIN_PAGE:
             gameStatus.cardsNeedToOpen =
@@ -209,7 +210,7 @@ var generateCards = function (cardQuantity) {
     auxArray = auxArray.slice(0, cardQuantity); //Вырезаем нужное количество карт
     auxArray = __spreadArray(__spreadArray([], auxArray, true), auxArray, true); //Добавляем пары
     shuffle(auxArray); // Перемешиваем отбранные пары
-    for (var i = 0; i < 36; i++) {
+    for (var i = 0; i < cardQuantity * 2; i++) {
         CardList[i] = {
             id: i < cardQuantity * 2 ? auxArray[i] : 99,
             status: _src_const__WEBPACK_IMPORTED_MODULE_4__.CLOSED,
@@ -379,9 +380,9 @@ var timer = function (deadline) {
                 secs = '0' + String(sec);
             if (min < 10)
                 mins = '0' + String(min);
-            _script__WEBPACK_IMPORTED_MODULE_0__.gameStatus.timeString = mins + ':' + secs;
+            _script__WEBPACK_IMPORTED_MODULE_0__.gameStatus.timeString = mins + '.' + secs;
             if (timerString)
-                timerString.innerHTML = mins + ':' + secs;
+                timerString.innerHTML = mins + '.' + secs;
         }, 1000);
     }
 };
@@ -408,6 +409,7 @@ function activateCards(cards) {
         if (cards[Number(card.id)].id !== 99) {
             card.classList.add('pointer');
         }
+        ;
         card.onclick = function () {
             if (cards[Number(card.id)].id !== 99) {
                 cards[Number(card.id)].status = _const__WEBPACK_IMPORTED_MODULE_2__.OPENED; // Возможно, что уже не нужно
@@ -432,12 +434,13 @@ function activateCards(cards) {
                     else {
                         clearInterval(gameTimer);
                         (0,_script__WEBPACK_IMPORTED_MODULE_0__.goToPage)(_const__WEBPACK_IMPORTED_MODULE_2__.DEFEAT_PAGE);
+                        _script__WEBPACK_IMPORTED_MODULE_0__.gameStatus.firstCard = undefined;
                     }
-                    _script__WEBPACK_IMPORTED_MODULE_0__.gameStatus.firstCard = undefined;
                 }
                 else {
                     _script__WEBPACK_IMPORTED_MODULE_0__.gameStatus.firstCard = cards[Number(card.id)];
                 }
+                ;
                 card.onclick = null;
             }
         };

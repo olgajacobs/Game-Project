@@ -7,10 +7,10 @@ export function renderDefeatPage() {
     fillStatus(cards, CARDS)
     renderGamePage(cards)
     const appEl = document.getElementById('wrapper')
-if (appEl) {
-    let appHtml =
-        appEl.innerHTML +
-        `
+    if (appEl) {
+        const appHtml =
+            appEl.innerHTML +
+            `
             <div class="win-main">
                 <div class="win-smile"> <img src="./assets/images/lose.png" alt="win" class='win-mark'></div>
                     <h3 class="win-title">Вы проиграли</h3>
@@ -22,6 +22,6 @@ if (appEl) {
                     <button class="restart-button pointer">Играть снова</button>
             </div>
         `
-    appEl.innerHTML = appHtml
-}
+        appEl.innerHTML = appHtml
+    }
 }
