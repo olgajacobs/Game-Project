@@ -1,7 +1,7 @@
 export function renderLevelPage() {
-    const appEl= document.getElementById('wrapper');
-if (appEl) { 
-    const appHtml = `
+    const appEl = document.getElementById('wrapper')
+    if (appEl) {
+        const appHtml = `
             <div class="main">
                 <h3 class="main-title">Выбери сложность</h3>
                 <div class="radio-group">
@@ -16,7 +16,7 @@ if (appEl) {
                 </div>
                 <button class="start-button">Старт</button>
             </div>
-        `;
-    appEl.innerHTML = appHtml;
-}
+        `
+        appEl.innerHTML = appHtml
+    }
 }

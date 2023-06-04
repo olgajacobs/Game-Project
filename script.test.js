@@ -16,10 +16,10 @@ describe('function generateCards()', () => {
 
         assert.equal(typeof cardsSet, typeExpected)
     })
-    it('should return array with length 36', () => {
+    it('should return array with length 12', () => {
         //Подготовка
         const cardQuantity = 6
-        const lengthExpected = 36
+        const lengthExpected = cardQuantity * 2
         // Действие
         const cardsSet = generateCards(cardQuantity)
         //Сверка

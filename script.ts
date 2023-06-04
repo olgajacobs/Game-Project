@@ -33,7 +33,8 @@ import {
     WIN_PAGE,
     DEFEAT_PAGE,
     CLOSED,
-    BEGIN,
+    //    BEGIN,
+    CARDS,
 } from './src/const'
 import './style.css'
 
@@ -46,7 +47,7 @@ export const goToPage = (newPage: string) => {
             gameStatus.cardsNeedToOpen =
                 cardQuantityForLevel[gameStatus.level - 1]
             cards = generateCards(cardQuantityForLevel[gameStatus.level - 1])
-            playGame(BEGIN)
+            playGame(CARDS)
             break
         case WIN_PAGE:
             gameStatus.cardsNeedToOpen =
@@ -73,7 +74,7 @@ export const generateCards = (cardQuantity: number) => {
 
     shuffle(auxArray) // Перемешиваем отбранные пары
 
-    for (let i = 0; i < 36; i++) {
+    for (let i = 0; i < cardQuantity * 2; i++) {
         CardList[i] = {
             id: i < cardQuantity * 2 ? auxArray[i] : 99,
             status: CLOSED,

@@ -1,6 +1,6 @@
-/*!*************************************************************!*\
+/* !*************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./style.css ***!
-  \*************************************************************/
+  \ *************************************************************/
 @font-face {
     font-family: StratosSkyeng;
     src: "'url(./statosskyeng-v1.001/stratosskyengweb-regular.woff)'";
@@ -152,14 +152,13 @@ header {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 .memory-card {
     width: 0, 11111%;
     height: 25%;
 }
-
 
 .back-counter {
     font-weight: 600;
@@ -218,7 +217,4 @@ header {
     text-align: center;
     color: #800013;
     margin-top: 52px;
-}
-
-
-/*# sourceMappingURL=main.css.map*/
+} /*# sourceMappingURL=main.css.map*/
